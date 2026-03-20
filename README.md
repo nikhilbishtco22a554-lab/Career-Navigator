@@ -2,7 +2,7 @@
 
 ## 📄 README Template  
 
-**Candidate Name:** Nikhil Bisht**  
+**Candidate Name:** Nikhil Bisht  
 **Scenario Chosen:** Skill-Bridge Career Navigator - Building a career platform that looks at your current skills/portfolio and suggests exactly what you need to learn to land your dream job.  
 **Estimated Time Spent:** ~4.5 hours  
 
