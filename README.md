@@ -42,7 +42,7 @@ python backend/test_api.py
 
 Check out this video walkthrough to see the Career Navigator in action:
 
-[Watch on YouTube](https://www.youtube.com/watch?v=blWTIDnwO8g)
+[Watch on YouTube]([https://www.youtube.com/watch?v=blWTIDnwO8g](https://www.youtube.com/watch?v=tYch_iWb13o))
 
 ---
 
