@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Dynamic Base URL detection
         const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const API_URL = IS_LOCAL ? 'http://127.0.0.1:8000/analyze' : '/api/analyze';
+        const API_URL = IS_LOCAL ? 'http://127.0.0.1:8000/analyze' : '/analyze';
 
         try {
             const response = await fetch(API_URL, {
