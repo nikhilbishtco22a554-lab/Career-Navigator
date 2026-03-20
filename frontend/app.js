@@ -40,8 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
         welcomeText.textContent = "Analyzing Your Profile";
         agentNotes.textContent = "Our AI is currently mapping your skills against industry standards...";
 
+        // Dynamic Base URL detection
+        const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_URL = IS_LOCAL ? 'http://127.0.0.1:8000/analyze' : '/api/analyze';
+
         try {
-            const response = await fetch('http://127.0.0.1:8000/analyze', {
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
