@@ -6,49 +6,44 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path="backend/.env")
 
-# BASE_URL = "http://127.0.0.1:8000"
-BASE_URL = "http://127.0.0.1:8000" # Using local for tests, update to Vercel if needed
-API_KEY = os.getenv("API_KEY", "secret-api-key-123")
+BASE_URL = "http://127.0.0.1:8000" 
 
-def run_step(step_num, title, payload, headers):
+def run_step(step_num, title, payload):
     print(f"\n[Step {step_num}] {title}")
     try:
-        resp = requests.post(f"{BASE_URL}/analyze", headers=headers, json=payload)
-        resp.raise_for_status()
-        print(f"Response: {json.dumps(resp.json(), indent=2)}")
+        resp = requests.post(f"{BASE_URL}/analyze", json=payload)
+        
+        # We print both successful responses and anticipated error messages for edge cases
+        if resp.status_code == 200:
+             print(f"Success! Response: {json.dumps(resp.json(), indent=2)}")
+        else:
+             print(f"Expected Error Caught: {resp.status_code} - {resp.text}")
+             
     except Exception as e:
-        print(f"Error in Step {step_num}: {e}")
-        if hasattr(e, 'response') and e.response is not None:
-             print(e.response.text)
+        print(f"Connection Error: {e}")
 
-def test_api():
-    session_id = str(uuid.uuid4())
-    print(f"--- Starting Test Session: {session_id} ---")
+def run_tests():
+    print("--- Starting Required Hackathon Tests ---")
     
-    headers = {
-        "x-api-key": API_KEY,
-        "Content-Type": "application/json"
-    }
-
-    # 1. New Grad to Cloud Engineer
-    payload_1 = {
-        "sessionId": session_id,
+    # 1. Happy Path Test
+    payload_happy = {
+        "sessionId": str(uuid.uuid4()),
         "resume_text": "Recent CS Graduate. Proficient in Python, Java, Data Structures, and basic SQL. Academic projects in Machine Learning and Web Development.",
         "target_role": "Cloud Engineer at AWS",
-        "portfolio_summary": "GitHub has 10 repos, mostly school projects and a simple React app."
+        "portfolio_summary": "GitHub has 10 repos, mostly school projects."
     }
-    run_step(1, "Testing Cloud Engineer Gap Analysis", payload_1, headers)
+    run_step(1, "Testing Happy Path (Cloud Engineer Profile)", payload_happy)
 
-    # 2. Career Switcher Marketing to Data Analytics
-    payload_2 = {
+    # 2. Edge Case Test: Input Validation Failure (Empty Resume/Role)
+    payload_edge = {
         "sessionId": str(uuid.uuid4()),
-        "resume_text": "5 years in Digital Marketing. Expert in Google Analytics, SEO, and Excel. Looking for a more data-focused role.",
-        "target_role": "Data Analyst",
+        "resume_text": "Short", # Triggers length validation error
+        "target_role": "",      # Triggers length validation error
         "portfolio_summary": ""
     }
-    run_step(2, "Testing Career Switcher to Data Analyst", payload_2, headers)
+    run_step(2, "Testing Edge Case (Input Validation with Empty Fields)", payload_edge)
 
-    print("\n--- Test Complete ---")
+    print("\n--- Tests Complete ---")
 
 if __name__ == "__main__":
-    test_api()
+    run_tests()

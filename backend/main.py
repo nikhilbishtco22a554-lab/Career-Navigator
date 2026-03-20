@@ -176,15 +176,41 @@ def generate_career_path(session_id: str, request_data: ProfileRequest) -> dict:
         with open("backend/error.log", "a") as f:
             f.write(f"LLM Logic Error: {e}\nResponse Text: {response_text}\n")
         print(f"LLM Logic Error: {e}")
-        # Fallback safe response
+        # Rule-based manual fallback system:
+        target = request_data.target_role.lower()
+        if "data" in target:
+            manual_skills = ["SQL", "Pandas", "Statistics"]
+            course = "Data Analysis Bootcamp"
+        elif "cloud" in target:
+            manual_skills = ["AWS/Azure", "Docker", "Networking"]
+            course = "Cloud Foundation Certification"
+        elif "frontend" in target or "ui" in target:
+            manual_skills = ["React.js", "CSS Grid", "JavaScript APIs"]
+            course = "Advanced Frontend Frameworks"
+        else:
+            manual_skills = ["System Design", "Advanced Algorithms", "Git/CI-CD"]
+            course = "Comprehensive Software Engineering Program"
+            
         return {
             "gap_analysis": {
-                 "current_skills": [],
-                 "missing_skills": []
+                 "current_skills": ["Basic IT Knowledge"],
+                 "missing_skills": manual_skills
             },
-            "learning_roadmap": [],
-            "mock_interview_questions": [],
-            "agent_notes": "We encountered an error processing your profile. Please try again."
+            "learning_roadmap": [
+                {
+                    "skill": manual_skills[0],
+                    "course_suggestion": course,
+                    "provider": "Manual Rules Fallback System",
+                    "cost_estimate": "Free",
+                    "course_link": "https://www.youtube.com/results?search_query=" + course.replace(" ", "+"),
+                    "estimated_time": "1 month"
+                }
+            ],
+            "mock_interview_questions": [
+                f"How would you apply your knowledge of {manual_skills[0]} to solve a business problem?",
+                "Can you describe a time you learned a new technical skill quickly?"
+            ],
+            "agent_notes": "AI provider unavailable. Roadmap generated via our manual rule-based fallback system."
         }
 
 def send_callback(session_id: str, session_data: dict, analysis_result: dict):
@@ -216,6 +242,11 @@ async def analyze_endpoint(request: ProfileRequest, background_tasks: Background
     """
     Main execution endpoint for career analysis.
     """
+    if len(request.target_role.strip()) < 2:
+        raise HTTPException(status_code=400, detail="target_role must be at least 2 characters long")
+    if len(request.resume_text.strip()) < 10:
+        raise HTTPException(status_code=400, detail="resume_text must be provided and have substantial content")
+
     session_id = request.sessionId or "default-session"
     
     session = get_session(session_id)

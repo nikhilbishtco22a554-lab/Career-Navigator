@@ -13,6 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.getElementById('cost-filter').addEventListener('change', (e) => {
+        const filterVal = e.target.value;
+        const roadmapTimeline = document.getElementById('roadmap-timeline');
+        
+        let filteredData = window.currentRoadmapData || [];
+        if (filterVal === 'free') {
+            filteredData = filteredData.filter(item => (item.cost_estimate || '').toLowerCase().includes('free') || (item.cost_estimate || '').includes('0'));
+        } else if (filterVal === 'paid') {
+            filteredData = filteredData.filter(item => !((item.cost_estimate || '').toLowerCase().includes('free') || (item.cost_estimate || '').includes('0')));
+        }
+        
+        renderRoadmap(filteredData, roadmapTimeline);
+    });
+
     // Form Submission
     const form = document.getElementById('analyze-form');
     const submitBtn = document.getElementById('submit-btn');
@@ -104,9 +118,23 @@ document.addEventListener('DOMContentLoaded', () => {
             "<li>No missing skills identified</li>";
 
         // Roadmap
-        const roadmapTimeline = document.getElementById('roadmap-timeline');
-        if (data.learning_roadmap && data.learning_roadmap.length > 0) {
-            roadmapTimeline.innerHTML = data.learning_roadmap.map(item => {
+        window.currentRoadmapData = data.learning_roadmap || [];
+        renderRoadmap(window.currentRoadmapData, document.getElementById('roadmap-timeline'));
+
+        // Interview
+        const interviewDiv = document.getElementById('interview-questions');
+        if (data.mock_interview_questions && data.mock_interview_questions.length > 0) {
+             interviewDiv.innerHTML = data.mock_interview_questions.map(q => `
+                <div class="question-card">${q}</div>
+            `).join('');
+        } else {
+             interviewDiv.innerHTML = "<p>No questions generated.</p>";
+        }
+    }
+
+    function renderRoadmap(roadmapArray, container) {
+        if (roadmapArray && roadmapArray.length > 0) {
+            container.innerHTML = roadmapArray.map(item => {
                 const cost = item.cost_estimate || 'N/A';
                 const isFree = cost.toLowerCase().includes('free') || cost.includes('0');
                 const badgeClass = isFree ? 'free' : 'paid';
@@ -129,17 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }).join('');
         } else {
-             roadmapTimeline.innerHTML = "<p>No roadmap items generated.</p>";
-        }
-
-        // Interview
-        const interviewDiv = document.getElementById('interview-questions');
-        if (data.mock_interview_questions && data.mock_interview_questions.length > 0) {
-             interviewDiv.innerHTML = data.mock_interview_questions.map(q => `
-                <div class="question-card">${q}</div>
-            `).join('');
-        } else {
-             interviewDiv.innerHTML = "<p>No questions generated.</p>";
+             container.innerHTML = "<p>No roadmap items generated or matching this filter.</p>";
         }
     }
 });

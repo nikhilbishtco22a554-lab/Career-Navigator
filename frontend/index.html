@@ -75,6 +75,14 @@
                 </div>
 
                 <div class="tab-content" id="roadmap-tab">
+                    <div class="filter-bar" style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                        <label for="cost-filter" style="color: var(--text-muted); font-size: 0.9rem;">Filter by Cost:</label>
+                        <select id="cost-filter" style="padding: 0.5rem; border-radius: 0.5rem; background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border-color); outline: none;">
+                            <option value="all">All Courses</option>
+                            <option value="free">Free Only</option>
+                            <option value="paid">Paid Only</option>
+                        </select>
+                    </div>
                     <div class="roadmap-timeline" id="roadmap-timeline"></div>
                 </div>
 

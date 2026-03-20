@@ -1,0 +1,17 @@
+[
+  {
+    "target_role": "Python Backend Developer",
+    "resume_text": "Recent CS grad with basic Python loops and lists. Built a small calculator.",
+    "portfolio_summary": "Nothing yet"
+  },
+  {
+    "target_role": "Cloud Engineer",
+    "resume_text": "I know basic networking and have a minor in computer science. Used Linux mostly.",
+    "portfolio_summary": "1 github repo with an automation bash script"
+  },
+  {
+    "target_role": "Data Analyst",
+    "resume_text": "5 years in Digital Marketing. Expert in exact Google Analytics, SEO, and Excel.",
+    "portfolio_summary": "Extensive spreadsheets and formula documents"
+  }
+]
