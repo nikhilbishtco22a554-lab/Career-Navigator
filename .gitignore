@@ -1,0 +1,37 @@
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Secrets
+.env
+backend/.env
+frontend/.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Logs
+*.log
+backend/error.log
+error.log
+
+# Node (Future-proofing)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Editors & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

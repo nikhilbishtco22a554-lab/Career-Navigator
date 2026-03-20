@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill-Bridge Career Navigator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Skill-Bridge</h2>
+                <p>Career Navigator</p>
+            </div>
+
+            <form id="analyze-form">
+                <div class="form-group">
+                    <label>Target Role</label>
+                    <input type="text" id="target-role" placeholder="e.g. Cloud Engineer" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Resume / Skills</label>
+                    <textarea id="resume-text" rows="5" placeholder="Paste your resume or current skills here..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Portfolio Summary (Optional)</label>
+                    <textarea id="portfolio-text" rows="3" placeholder="Briefly describe your projects/GitHub repos..."></textarea>
+                </div>
+
+
+
+                <button type="submit" id="submit-btn" class="primary-btn">Analyze Profile</button>
+            </form>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="welcome-text">Your Career Path Awaits</h1>
+                <p id="agent-notes">Enter your details and click analyze to generate your personalized learning roadmap.</p>
+            </header>
+
+            <!-- Loading Spinner -->
+            <div id="loader" class="loader-container hidden">
+                <div class="spinner"></div>
+                <p>AI is analyzing your profile...</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-container" class="results-container hidden">
+                <!-- Navigation Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="gap">Gap Analysis</button>
+                    <button class="tab-btn" data-tab="roadmap">Learning Roadmap</button>
+                    <button class="tab-btn" data-tab="interview">Mock Interview</button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="tab-content active" id="gap-tab">
+                    <div class="skills-grid">
+                        <div class="skills-card current-skills">
+                            <h3><span class="icon">✅</span> Current Skills</h3>
+                            <ul id="current-skills-list"></ul>
+                        </div>
+                        <div class="skills-card missing-skills">
+                            <h3><span class="icon">❌</span> Missing Skills</h3>
+                            <ul id="missing-skills-list"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="roadmap-tab">
+                    <div class="roadmap-timeline" id="roadmap-timeline"></div>
+                </div>
+
+                <div class="tab-content" id="interview-tab">
+                    <div class="interview-questions" id="interview-questions"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
