@@ -1,47 +1,29 @@
 # Career-Navigator
 
-Career-Navigator is a full-stack web application designed to help users navigate their career paths by providing tools for job searching, interview preparation, and personalized AI-generated roadmaps.
+A full-stack career development platform with AI-powered roadmaps, job search, and interview preparation tools.
 
-## Features
-- **Authentication**: Secure user registration and login.
-- **Job Listings**: Search and save job opportunities.
-- **AI Roadmaps**: Generate personalized career roadmaps using OpenAI.
-- **Interview Preparation**: Practice and grade interview answers.
-
-## Deployment
-- **Frontend**: Deployed on Vercel.
-- **Backend**: Deployed on Render.
-
-### Live Website
-[Visit Career-Navigator](#)  <!-- Replace # with the actual deployed URL -->
-
-## Technologies Used
-- **Frontend**: React, Tailwind CSS, Axios, React Router
+## Tech Stack
+- **Frontend**: React, Tailwind CSS, Axios, React Router, Vite
 - **Backend**: Node.js, Express, MongoDB, Mongoose, JWT, OpenAI API
 
-## Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/nikhilbishtco22a554-lab/Career-Navigator.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Career-Navigator
-   ```
-3. Install dependencies for both frontend and backend:
-   ```bash
-   cd client && npm install
-   cd ../server && npm install
-   ```
-4. Create `.env` files in both `client` and `server` directories based on the provided `.env.example` files.
-5. Start the development servers:
-   ```bash
-   # In one terminal
-   cd server && npm start
+## Quick Start
 
-   # In another terminal
-   cd client && npm run dev
-   ```
+### Backend (Server)
+```bash
+cd server
+npm install
+npm start
+```
+Server runs on `http://localhost:5000`
 
-## License
-This project is licensed under the MIT License.
+### Frontend (Client)
+```bash
+cd client
+npm install
+npm run dev
+```
+Client runs on `http://localhost:5173`
+
+## Live Demo
+- **Frontend**: [Vercel Deployment](https://career-navigator-vercel.vercel.app)
+- **Backend**: [Render Deployment](https://career-navigator-render.onrender.com)
