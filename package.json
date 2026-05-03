@@ -1,15 +1,5 @@
 {
   "name": "career-navigator",
   "version": "1.0.0",
-  "private": true,
-  "workspaces": [
-    "server",
-    "client"
-  ],
-  "scripts": {
-    "install": "npm install --workspaces",
-    "start": "npm run start --workspaces",
-    "start:server": "npm --prefix server start",
-    "start:client": "npm --prefix client run dev"
-  }
+  "private": true
 }

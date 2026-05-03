@@ -1,11 +1,10 @@
 const express = require('express');
-const { generateRoadmap, gradeAnswer, getMyRoadmap } = require('../controllers/roadmapController');
-const authMiddleware = require('../middleware/auth');
-
 const router = express.Router();
+const roadmapController = require('../controllers/roadmapController');
+const auth = require('../middleware/auth');
 
-router.post('/generate', authMiddleware, generateRoadmap);
-router.post('/grade-answer', authMiddleware, gradeAnswer);
-router.get('/my', authMiddleware, getMyRoadmap);
+router.post('/generate', auth, roadmapController.generateRoadmap);
+router.post('/grade-answer', auth, roadmapController.gradeAnswer);
+router.get('/my', auth, roadmapController.getMyRoadmap);
 
 module.exports = router;
