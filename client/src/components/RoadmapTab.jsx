@@ -47,7 +47,7 @@ const RoadmapTab = () => {
         targetRole: targetRole.trim(),
       });
 
-      setResult(response.data.roadmap);
+      setResult(response.data);
     } catch (err) {
       setError(err?.response?.data?.message || 'Unable to generate roadmap.');
     } finally {

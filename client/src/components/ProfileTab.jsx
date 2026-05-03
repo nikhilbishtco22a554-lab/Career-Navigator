@@ -11,7 +11,7 @@ const ProfileTab = () => {
     const loadProfile = async () => {
       try {
         const response = await api.get('/api/auth/me');
-        setProfile(response.data.user);
+        setProfile(response.data);
       } catch (err) {
         setError('Unable to load profile information.');
       }

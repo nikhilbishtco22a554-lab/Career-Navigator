@@ -25,7 +25,7 @@ exports.searchJobs = async (req, res) => {
       redirectUrl: job.redirect_url,
     }));
 
-    res.status(200).json(jobs);
+    res.status(200).json({ jobs });
   } catch (err) {
     res.status(503).json({ error: true, message: 'Failed to fetch jobs from Adzuna' });
   }
@@ -53,7 +53,7 @@ exports.saveJob = async (req, res) => {
 exports.getSavedJobs = async (req, res) => {
   try {
     const savedJobs = await SavedJob.find({ userId: req.userId });
-    res.status(200).json(savedJobs);
+    res.status(200).json({ jobs: savedJobs });
   } catch (err) {
     res.status(500).json({ error: true, message: 'Failed to fetch saved jobs' });
   }
